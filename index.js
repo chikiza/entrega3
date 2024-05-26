@@ -40,15 +40,21 @@ class User {
         let users = this.#users;
         users.forEach(u => this.#ul.appendChild(this.renderUser(u)));
 
+        
         return this.#ul;
     }
 
     static onSubmit(e){
-        
         e.preventDefault();
         let data = serialize(e.target);
         let user = new User(data);
         const errors = user.validate();
+        if (Object.keys(errors).length > 0) {
+            console.log(this);
+            this.#form.innerHTML = this.formHTML({ data, errors })
+            return;
+        }
+        
     }
 
     validate() {
@@ -82,7 +88,7 @@ class User {
     }
 
     static renderForm(){
-        this.#form.onsubmit = this.onSubmit;
+        this.#form.onsubmit = this.onSubmit.bind(this);
         this.#form.innerHTML = this.formHTML({
             data: this.#initialValues,
             errors: {},
