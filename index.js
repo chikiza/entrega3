@@ -54,7 +54,10 @@ class User {
             this.#form.innerHTML = this.formHTML({ data, errors })
             return;
         }
-        
+        user.save();
+    }
+    save(){
+        return User.save(this)
     }
 
     validate() {
