@@ -1,20 +1,9 @@
-const URL_BASE = "https://pokeapi.co/api/v2/";
+const API_URL = "https://jsonplaceholder.typicode.com/";
 
-/*https: fetch(`${URL_BASE}pokemon/pikachu`)
-.then((response) => response.json())
-.then((data) => console.log(data))
-.catch(error => console.log('ERROR', error))
-.finally(console.log('termine'));*/
+const HTMLResponse = document.querySelector("#app");
 
-const getPokemon = async() => {
-    try {
-        const response = await fetch(`${URL_BASE}pokemon/charizard`)
-        const data = await response.json()
-        console.log(data)
-    } catch (error) {
-
-    } finally {
-
-    }
-}
-getPokemon()
+fetch(`${API_URL}/users`)
+.then((response)=> response.json())
+.then((users) =>{
+    const tpl = users.map(user => <li></li>)
+})
